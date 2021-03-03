@@ -2,24 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <groupId>org.geekbang.projects</groupId>
-        <artifactId>user-platform</artifactId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
+   <parent>
+       <groupId>org.lesson</groupId>
+       <artifactId>user-platform</artifactId>
+       <version>1.0-SNAPSHOT</version>
+   </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>user-web</artifactId>
-    <name>User Web Application ${revision}</name>
     <packaging>war</packaging>
-
 
     <dependencies>
         <dependency>
-            <groupId>org.geekbang.projects</groupId>
+            <groupId>org.lesson</groupId>
             <artifactId>my-web-mvc</artifactId>
-            <version>${revision}</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <!-- Servlet API -->
@@ -39,29 +36,32 @@
             <artifactId>derby</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
+
         <plugins>
-            <!-- Tomcat Maven 插件用于构建可执行 war -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.1</version>
-                <executions>
-                    <execution>
-                        <id>tomcat-run</id>
-                        <goals>
-                            <!-- 最终打包成可执行的jar包 -->
-                            <goal>exec-war-only</goal>
-                        </goals>
-                        <phase>package</phase>
-                        <configuration>
-                            <!-- ServletContext 路径 -->
-                            <path>/</path>
-                        </configuration>
-                    </execution>
-                </executions>
+                <configuration>
+                    <path>/</path>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
